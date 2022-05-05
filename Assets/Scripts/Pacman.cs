@@ -2,17 +2,39 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Movement))]
 public class Pacman : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public Movement movement { get; private set; }
+
+    private void Awake() 
     {
-        
+        movement = GetComponent<Movement>();
+    }
+    private void Update() 
+    {
+        //Normal keyboard movement
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            movement.SetDirection(Vector2.up);
+        }
+        else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            movement.SetDirection(Vector2.down);
+        }
+        else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            movement.SetDirection(Vector2.left);
+        }
+        else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            movement.SetDirection(Vector2.right);
+        }
+        // Delcare angle
+        float angle = Mathf.Atan2(movement.direction.y, movement.direction.x);
+        // Create a rotation, rotating some amount of degrees around whatever axis we pick
+        // Convert from radius to degrees with Mathf.Rad2Deg and apply to Z Axis
+        transform.rotation = Quaternion.AngleAxis(angle * Mathf.Rad2Deg, Vector3.forward);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
