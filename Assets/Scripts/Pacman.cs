@@ -1,14 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Movement))]
 public class Pacman : MonoBehaviour
 {
+    public AnimatedSprite deathSequence;
+    public SpriteRenderer spriteRenderer { get; private set; }
+    public new Collider2D collider { get; private set; }
     public Movement movement { get; private set; }
 
     private void Awake() 
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        collider = GetComponent<Collider2D>();
         movement = GetComponent<Movement>();
     }
     private void Update() 
@@ -30,7 +33,7 @@ public class Pacman : MonoBehaviour
         {
             movement.SetDirection(Vector2.right);
         }
-        // Delcare angle
+        // Declare angle
         float angle = Mathf.Atan2(movement.direction.y, movement.direction.x);
         // Create a rotation, rotating some amount of degrees around whatever axis we pick
         // Convert from radius to degrees with Mathf.Rad2Deg and apply to Z Axis

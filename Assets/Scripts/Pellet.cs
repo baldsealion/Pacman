@@ -8,7 +8,7 @@ public class Pellet : MonoBehaviour
     // virtual = allow to override it
     protected virtual void Eat()
     {
-        FindObjectOfType<GameManager>().PelletEaten();
+        FindObjectOfType<GameManager>().PelletEaten(this);
     }
     private void OnTriggerEnter2D(Collider2D other)
     {

@@ -106,14 +106,14 @@ public class GameManager : MonoBehaviour
 
         public void PowerPelletEaten(PowerPellet pellet)
         {           
-            PelletEaten();
+            PelletEaten(pellet);
             CancelInvoke();
             Invoke(nameof(ResetGhostMultiplier), pellet.duration);
         }
 
         private bool HasRemainingPellets()
         {
-            foreach (Transform pellet in pellets)
+            foreach (Transform pellet in this.pellets)
             {
                 if (pellet.gameObject.activeSelf) 
                 {
